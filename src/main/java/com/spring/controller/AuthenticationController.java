@@ -9,10 +9,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.spring.dto.LoginRequestDto;
 import com.spring.dto.UserDto;
+import com.spring.exception.Response;
 import com.spring.service.AuthenticationService;
-import com.spring.view.Response;
 
 @RestController
 public class AuthenticationController {
@@ -25,7 +26,7 @@ public class AuthenticationController {
 	    }
 	  
 	  @PostMapping("/signup")
-	    public Response Register(@Valid @RequestBody UserDto signUpRequest, HttpServletRequest request, HttpServletResponse response){
-	        return authenticationService.registerUser(signUpRequest);
+	    public Response Register(@Valid @RequestBody UserDto signUpRequest,BindingResult result){
+		  return authenticationService.registerUser(signUpRequest);
 	    }
 }

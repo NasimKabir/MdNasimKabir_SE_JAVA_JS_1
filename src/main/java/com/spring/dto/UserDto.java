@@ -1,9 +1,9 @@
 package com.spring.dto;
 
-import java.util.*;
+import java.util.Set;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -15,7 +15,7 @@ public class UserDto {
 	@Size(min = 4, max = 20,message = "User Name is Mandatory")
 	private String username;
 
-	@NotBlank(message = "You Have To Enter The Password")
+	//@NotBlank(message = "You Have To Enter The Password")
 	@Size(min = 4, max = 20, message = "Password length should be in between 8 to 20")
 	private String password;
 
@@ -23,7 +23,7 @@ public class UserDto {
 	@Email( message = "Invalid Email Pattern")
 	private String email;
 
-	@NotEmpty(message = "Phone Number is Mandatory")
+	//@NotEmpty(message = "Phone Number is Mandatory")
 	@Pattern(regexp = "^(?:\\+?88)?01[3-9]\\d{8}$", message = "invalid mobile number.")
 	@Size(max = 11, message = "digits should be 11")
 	private String phone;

@@ -1,9 +1,8 @@
-package com.spring.view;
+package com.spring.exception;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.spring.dto.ErrorResponseDto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -22,5 +21,5 @@ public class Response {
 	    @JsonInclude(JsonInclude.Include.NON_NULL)
 	    private Object content;
 	    @JsonInclude(JsonInclude.Include.NON_NULL)
-	    private List<ErrorResponseDto> errors;
+	    private List<ErrorResponse> errors;
 }
