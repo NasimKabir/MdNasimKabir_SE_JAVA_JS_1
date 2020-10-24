@@ -10,4 +10,5 @@ public class ProductDto {
 	private double sellingPrice;
 	private double profitPercentage;
 	private ProductType productType;
+	
 }

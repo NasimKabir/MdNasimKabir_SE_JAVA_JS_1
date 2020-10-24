@@ -7,4 +7,5 @@ import com.spring.exception.Response;
 
 public interface OrderService {
 	 Response create(OrderDto orderDto, HttpServletRequest request);
+	 Response totalProductsell();
 }

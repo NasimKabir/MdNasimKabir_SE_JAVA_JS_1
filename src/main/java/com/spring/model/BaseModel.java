@@ -32,6 +32,7 @@ public abstract class BaseModel implements Serializable {
     private Date createdAt;
     
     private String updatedBy;
+    
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
     

@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,16 +25,12 @@ import com.spring.service.OrderService;
 public class OrderServiceImpl implements OrderService {
 	private final OrderRepository orderRepository;
 	private final OrderProductItemsRepository orderProductRepository;
-	private final ModelMapper modelMapper;
 	private final ProductRepository productRepository;
 
 	@Autowired
-	public OrderServiceImpl(OrderRepository orderRepository, OrderProductItemsRepository orderProductRepository,
-			ModelMapper modelMapper, ProductRepository productRepository) {
-		super();
+	public OrderServiceImpl(OrderRepository orderRepository, OrderProductItemsRepository orderProductRepository,ProductRepository productRepository) {
 		this.orderRepository = orderRepository;
 		this.orderProductRepository = orderProductRepository;
-		this.modelMapper = modelMapper;
 		this.productRepository = productRepository;
 	}
 
@@ -66,6 +61,15 @@ public class OrderServiceImpl implements OrderService {
 		 
 
         return ResponseBuilder.getSuccessResponse(HttpStatus.OK, "Order in processing. Confirm your order by complete your payment", null);
+	}
+
+	@Override
+	public Response totalProductsell() {
+		String sellProductNumber=String.valueOf(orderProductRepository.quantity());
+		if(sellProductNumber.length()>0) {
+			return ResponseBuilder.getSuccessResponse(HttpStatus.OK,"Total product selling Number is "+sellProductNumber);
+		}
+		return ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "Not found");
 	}
 
 }

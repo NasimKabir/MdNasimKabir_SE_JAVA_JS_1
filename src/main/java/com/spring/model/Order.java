@@ -16,6 +16,7 @@ public class Order extends BaseModel {
 	private static final long serialVersionUID = 1L;
 	private Long customerId;
 	 private String totalPrice;
+	 
 	@OneToMany(mappedBy = "productId", cascade = CascadeType.ALL)
 	private List<OrderProductItems> items;
 }
