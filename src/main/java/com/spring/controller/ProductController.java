@@ -68,4 +68,14 @@ public class ProductController {
 	    public List<Product> getProfit() {
 	        return productRepository.profitable();
 	    }
+	    
+	    @GetMapping("/min")
+	    public Response getMin() {
+	        return productService.min();
+	    }
+	    
+	    @GetMapping("/max")
+	    public Response getMax() {
+	        return productService.max();
+	    }
 }

@@ -104,6 +104,25 @@ public class ProductServiceImpl implements ProductService {
 	        return productDtos;
 	}
 
-	
+	 @Override
+		public Response min() {
+		 String minPrice=String.valueOf(productRepository.min());
+		 System.out.println("******************************"+minPrice);
+		 if(minPrice !=null) {
+				return ResponseBuilder.getSuccessResponse(HttpStatus.OK,"Minimum price is "+minPrice);
+			}
+			return ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "Not found");
+		}
+
+		@Override
+		public Response max() {
+			String maxPrice=String.valueOf(productRepository.max());
+			System.out.println("******************************"+maxPrice);
+			if(maxPrice.length()>0) {
+				return ResponseBuilder.getSuccessResponse(HttpStatus.OK,"Maximum price is "+maxPrice);
+			}
+			return ResponseBuilder.getFailureResponse(HttpStatus.NOT_FOUND, "Not found");
+		}
+
 
 }
