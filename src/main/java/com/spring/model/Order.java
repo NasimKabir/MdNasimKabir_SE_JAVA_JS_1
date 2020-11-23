@@ -11,7 +11,6 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "orders")
 public class Order extends BaseModel {
 	private static final long serialVersionUID = 1L;
 	private Long customerId;

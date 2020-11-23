@@ -21,6 +21,7 @@ public class Product extends BaseModel{
 	private double sellingPrice;
 	private double profitPercentage;
 	private boolean status;
+	private String image;
 	
 	
 	

@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.dto.ProductDto;
 import com.spring.dto.ProductTypeDto;
@@ -38,8 +42,8 @@ public class ProductController {
 	    }
 	 
 	 @PostMapping("/product")
-	    public Response productCreated(@Valid @RequestBody ProductDto productDto,BindingResult result){
-		  return productService.productInserted(productDto);
+	    public Response productCreated(@Valid @RequestBody ProductDto productDto,BindingResult result,@RequestParam("file") MultipartFile file){
+		  return productService.productInserted(productDto,file);
 	    }
 	 
 	 @PutMapping("/product/{id}")
@@ -60,8 +64,17 @@ public class ProductController {
 	    }
 
 	    @GetMapping("/product")
-	    public Response getAll(Pageable pageable) {
-	        return productService.getAllProduct(pageable);
+	    public ResponseEntity<CollectionModel<ProductDto>> getAll(@RequestParam(required = false, defaultValue = "0") Integer page,
+                @RequestParam(required = false, defaultValue = "3") Integer size,
+                @RequestParam(required = false) String[] sort,
+                @RequestParam(required = false, defaultValue = "asc") String dir) {
+
+	        @SuppressWarnings("unchecked")
+			CollectionModel<ProductDto> products = productService.getAllProduct(page, size, sort, dir);
+	        if(products != null) {
+	            return ResponseEntity.ok(products);
+	        }
+	        return ResponseEntity.noContent().build();
 	    }
 	    
 	    @GetMapping("/profit")
